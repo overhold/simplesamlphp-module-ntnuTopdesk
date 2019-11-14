@@ -1,0 +1,32 @@
+{
+    "name": "ntnu/ntnu-topdesk",
+    "description": "Verify if an user exists in TopDesk, and, if not, attempt to create an account",
+    "type": "simplesamlphp-module",
+    "require": {
+        "php": ">=5.6",
+        "simplesamlphp/composer-module-installer": "~1.1",
+        "webmozart/assert": "^1.5"
+    },
+    "require-dev": {
+        "simplesamlphp/simplesamlphp": "^1.17",
+        "phpunit/phpunit": "~5.7"
+    },
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Ricardo Iván Vieitez Parra",
+            "email": "ricardo.i.v.parra@ntnu.no"
+        }
+    ],
+    "config": {
+        "preferred-install": {
+            "simplesamlphp/simplesamlphp": "source",
+            "*": "dist"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleSAML\\Module\\ntnuTopdesk\\": "lib/"
+        }
+    }
+}
