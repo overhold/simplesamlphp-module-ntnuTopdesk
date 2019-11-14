@@ -1,5 +1,5 @@
 {
-    "name": "overhold/simplesamlphp-module-ntnuTopdesk",
+    "name": "overhold/simplesamlphp-module-ntnutopdesk",
     "description": "Verify if an user exists in TopDesk, and, if not, attempt to create an account",
     "type": "simplesamlphp-module",
     "require": {
