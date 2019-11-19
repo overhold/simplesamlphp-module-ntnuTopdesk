@@ -68,7 +68,6 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
 
     private function checkUserExists(&$attributes) {
         $ch = curl_init();
-        $exists = false;
         $sspLoginName = $attributes['mail'][0];
 
         if ($ch === FALSE) {
