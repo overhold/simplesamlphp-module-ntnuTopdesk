@@ -112,8 +112,9 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 $exists = ($rc === 200);
             }
         } catch(Exception $e) {
-            curl_close($ch);
             throw $e;
+        } finally {
+            curl_close($ch);
         }
 
         return $exists;
@@ -187,8 +188,9 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 }
             }
         } catch(Exception $e) {
-            curl_close($ch);
             throw $e;
+        } finally {
+            curl_close($ch);
         }
     }
 
