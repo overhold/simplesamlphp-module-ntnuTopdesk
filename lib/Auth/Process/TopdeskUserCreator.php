@@ -68,11 +68,6 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
 
     private function checkUserExists(&$attributes) {
         $ch = curl_init();
-<<<<<<< HEAD
-        $sspLoginName = $attributes['mail'][0];
-
-=======
->>>>>>> a8eeff6564be920a9eb546c3965dfc22312e5d49
         if ($ch === FALSE) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: Unable to initialise cURL session'
