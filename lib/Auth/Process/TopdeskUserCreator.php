@@ -68,7 +68,6 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
 
     private function checkUserExists(&$attributes) {
         $ch = curl_init();
-        $exists = false;
         $sspLoginName = $attributes['mail'][0];
 
         if ($ch === FALSE) {
@@ -111,7 +110,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 }
                 $exists = ($rc === 200);
             }
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             curl_close($ch);
             throw $e;
         }
@@ -186,7 +185,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                     );
                 }
             }
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             curl_close($ch);
             throw $e;
         }
