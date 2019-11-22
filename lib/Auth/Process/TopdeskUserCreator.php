@@ -33,7 +33,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
         assert(is_array($config));
         parent::__construct($config, $reserved);
 
-        if (!array_key_exists('baseURL', $config) || !is_string($config['baseURL'])) {
+        if (!isset($config['baseURL']) || !is_string($config['baseURL'])) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: A TopDesk base URL string must be given'
             );
@@ -41,7 +41,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
             $this->baseUrl = $config['baseURL'];
         }
 
-       if (!array_key_exists('username', $config) || !is_string($config['username'])) {
+       if (!isset($config['username']) || !is_string($config['username'])) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: A TopDesk username string must be given'
             );
@@ -49,7 +49,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
           $this->username = $config['username'];
        }
 
-        if (!array_key_exists('password', $config) || !is_string($config['password'])) {
+        if (!isset($config['password']) || !is_string($config['password'])) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: A TopDesk password string must be given'
             );
@@ -57,7 +57,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
             $this->password = $config['password'];
         }
 
-        if (!array_key_exists('branchId', $config) || !is_string($config['branchId'])) {
+        if (!isset($config['branchId']) || !is_string($config['branchId'])) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: A TopDesk branch ID string must be given'
             );
@@ -111,7 +111,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 }
                 $exists = ($rc === 200);
             }
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             curl_close($ch);
             throw $e;
         }
@@ -129,7 +129,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
 
         $sspLoginName = $attributes['mail'][0];
         $displayName = (
-                array_key_exists('displayName', $attributes) &&
+                isset($attributes['displayName']) &&
                 is_array($attributes['displayName']) &&
                 count($attributes['displayName']) === 1
             ) ? $attributes['displayName'][0]
@@ -185,7 +185,7 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                     );
                 }
             }
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             curl_close($ch);
             throw $e;
         }
