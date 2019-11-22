@@ -68,13 +68,19 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
 
     private function checkUserExists(&$attributes) {
         $ch = curl_init();
+<<<<<<< HEAD
         $sspLoginName = $attributes['mail'][0];
 
+=======
+>>>>>>> a8eeff6564be920a9eb546c3965dfc22312e5d49
         if ($ch === FALSE) {
             throw new \SimpleSAML\Error\Exception(
                 'TopdeskUserCreator: Unable to initialise cURL session'
             );
         }
+
+        $exists = false;
+        $sspLoginName = $attributes['mail'][0];
 
         try {
             curl_setopt($ch, CURLOPT_URL, $this->baseUrl . '/persons/?ssp_login_name=' . urlencode($sspLoginName));
@@ -119,6 +125,13 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
     }
 
     private function createUser(&$attributes) {
+        $ch = curl_init();
+        if ($ch === FALSE) {
+            throw new \SimpleSAML\Error\Exception(
+                'TopdeskUserCreator: Unable to initialise cURL session'
+            );
+        }
+
         $sspLoginName = $attributes['mail'][0];
         $displayName = (
                 isset($attributes['displayName']) &&
@@ -126,8 +139,6 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 count($attributes['displayName']) === 1
             ) ? $attributes['displayName'][0]
               : ($attributes['givenName'][0] . ' ' . $attributes['sn'][0]);
-
-        $ch = curl_init();
 
         $data = [
             'surName'         => substr($attributes['sn'][0], 0, 50),
@@ -141,12 +152,6 @@ class TopdeskUserCreator extends \SimpleSAML\Auth\ProcessingFilter
                 'text1' => substr($displayName, 0, 100),
             ],
         ];
-
-        if ($ch === FALSE) {
-            throw new \SimpleSAML\Error\Exception(
-                'TopdeskUserCreator: Unable to initialise cURL session'
-            );
-        }
 
         try {
             curl_setopt($ch, CURLOPT_URL, $this->baseUrl . '/persons');
